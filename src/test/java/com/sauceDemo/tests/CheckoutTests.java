@@ -54,7 +54,9 @@ public class CheckoutTests extends BaseTests {
         log.info(checkoutPage.getItemTotal().toString());
         log.info(checkoutPage.sumItemPrice().toString());
 
+
         checkoutPage.clickFinish().getSuccessMessage();
+        softly().assertTrue(checkoutPage.isValidCheckoutVisual(), "Visual Mismatch Detected!");
         softly().assertAll();
 
     }

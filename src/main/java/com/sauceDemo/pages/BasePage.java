@@ -9,6 +9,7 @@ import org.testng.asserts.SoftAssert;
 import utils.ConfigManager;
 import utils.SoftAssertManager;
 import utils.Utils;
+import utils.VisualTestUtil;
 
 import java.time.Duration;
 
@@ -17,13 +18,14 @@ public class BasePage {
     protected WebDriver driver;
     protected final By CartIcon = By.id("shopping_cart_container");
     protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/testData.json");
+    protected static VisualTestUtil visualTestUtil;
 
 
 
 
     public BasePage(WebDriver driver){
         this.driver=driver;
-
+        visualTestUtil = new VisualTestUtil(driver);
     }
 
     protected void clickElement(By element){
