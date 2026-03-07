@@ -22,23 +22,28 @@
     "invalidCheckout": {
       "firstName": "!@#$%",
       "lastName": "!@#$%",
-      "postalCode": "POSTAL!@#"
+      "postalCode": "POSTAL!@#",
+      "error": "Error:"
+
     },
     "emptyCheckout": {
       "emptyFirstName": {
         "firstName": "",
         "lastName": "Last",
-        "postalCode": "12345"
+        "postalCode": "12345",
+        "error": "Error: First Name is required"
       },
       "emptyLastName": {
         "firstName": "First",
         "lastName": "",
-        "postalCode": "12345"
+        "postalCode": "12345",
+        "error": "Error: Last Name is required"
       },
       "emptyPostalCode": {
         "firstName": "First",
         "lastName": "Last",
-        "postalCode": ""
+        "postalCode": "",
+        "error": "Error: Postal Code is required"
       }
 
     }
