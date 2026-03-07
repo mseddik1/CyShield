@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.VisualTestUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class CheckoutPage extends BasePage{
     private final By itemPrice = By.xpath("//div[@data-test='inventory-item-price']");
     private final By itemTotal = By.xpath("//div[@data-test='subtotal-label']");
     private final By successMessage = By.xpath("//h2[@data-test='complete-header']");
+    private final By checkoutCompleteContainer = By.id("checkout_complete_container");
 
 
     public CheckoutPage(WebDriver driver){
@@ -72,5 +74,9 @@ public class CheckoutPage extends BasePage{
                  "Check error message!");
 
          return this;
+    }
+
+    public boolean isValidCheckoutVisual(){
+        return visualTestUtil.takeAndCompareScreenshot(checkoutCompleteContainer,"test",null);
     }
 }
