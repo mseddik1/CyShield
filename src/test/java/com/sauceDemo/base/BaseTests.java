@@ -95,7 +95,7 @@ public class BaseTests {
 
 
 
-//    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     protected void tearDown(ITestResult result) {
 
         WebDriver driver = DriverManager.getDriver();
