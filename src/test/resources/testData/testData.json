@@ -1,0 +1,46 @@
+{
+  "login": {
+    "validUser": {
+      "username": "standard_user",
+      "password": "secret_sauce"
+    },
+    "invalidUser": {
+      "username": "wrong",
+      "password": "wrong"
+    },
+    "lockedOutUser": {
+      "username": "locked_out_user",
+      "password": "secret_sauce"
+    }
+  },
+  "checkout": {
+    "validCheckout": {
+      "firstName": "First",
+      "lastName": "Last",
+      "postalCode": "12345"
+    },
+    "invalidCheckout": {
+      "firstName": "!@#$%",
+      "lastName": "!@#$%",
+      "postalCode": "POSTAL!@#"
+    },
+    "emptyCheckout": {
+      "emptyFirstName": {
+        "firstName": "",
+        "lastName": "Last",
+        "postalCode": "12345"
+      },
+      "emptyLastName": {
+        "firstName": "First",
+        "lastName": "",
+        "postalCode": "12345"
+      },
+      "emptyPostalCode": {
+        "firstName": "First",
+        "lastName": "Last",
+        "postalCode": ""
+      }
+
+    }
+  }
+}

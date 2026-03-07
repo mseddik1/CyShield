@@ -1,0 +1,7 @@
+03:41:20 [main] DEBUG org.testng.TestNG - suiteXmlPath: "/Users/mseddik/Library/Caches/JetBrains/IdeaIC2025.2/temp-testng-customsuite.xml"
+03:41:21 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
+  /Users/mseddik/Library/Caches/JetBrains/IdeaIC2025.2/temp-testng-customsuite.xml
+
+03:41:21 [main] INFO  com.sauceDemo.base.BaseTests - Initiating invalidLogin | Thread: 1
+03:41:24 [main] INFO  com.listeners.TestListeners - Starting test: invalidLogin
+03:41:24 [main] INFO  com.listeners.TestListeners - Test PASSED: invalidLogin

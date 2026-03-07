@@ -1,0 +1,63 @@
+package com.sauceDemo.pages;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.testng.asserts.SoftAssert;
+import utils.ConfigManager;
+import utils.SoftAssertManager;
+import utils.Utils;
+
+import java.time.Duration;
+
+public class BasePage {
+
+    protected WebDriver driver;
+    protected final By CartIcon = By.id("shopping_cart_container");
+    protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/testData.json");
+
+
+
+
+    public BasePage(WebDriver driver){
+        this.driver=driver;
+
+    }
+
+    protected void clickElement(By element){
+        myWait().until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+
+    protected void typeElement(By element,String text){
+        WebElement el = myWait().until(ExpectedConditions.visibilityOfElementLocated(element));
+        el.clear();
+        el.sendKeys(text);
+    }
+
+
+    protected Wait<WebDriver> myWait(){
+        return new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(Long.parseLong(ConfigManager.get("explicitWait"))))
+                .pollingEvery(Duration.ofMillis(Long.parseLong(ConfigManager.get("pollingInterval"))))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class);
+    }
+
+
+    public CartPage openCart(){
+        clickElement(CartIcon);
+        return new CartPage(driver);
+    }
+
+
+
+    //Note for me: here i am creating an object of the softmanager.softly() that i already created
+    protected SoftAssert softly() {
+        return SoftAssertManager.softly();
+    }
+
+
+}

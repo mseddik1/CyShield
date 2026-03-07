@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "required": ["id", "username", "token"],
+  "properties": {
+    "id": {"type": "number"},
+    "username": {"type": "string"},
+    "token": {"type": "string"}
+  }
+}
