@@ -1,6 +1,7 @@
 package com.sauceDemo.pages;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -49,6 +50,7 @@ public class BasePage {
     }
 
 
+    @Step("Open Cart Page")
     public CartPage openCart(){
         clickElement(CartIcon);
         return new CartPage(driver);

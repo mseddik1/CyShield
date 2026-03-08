@@ -1,5 +1,6 @@
 package com.sauceDemo.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,22 +24,33 @@ public class HomePage extends BasePage {
     }
 
 
+    @Step("Verify whether user is on the inventory page")
     public boolean isLoginSuccessful(){
+
         return driver.getCurrentUrl().contains("inventory.html");
+
+    }
+
+    public HomePage waitUntilLoaded(){
+        myWait().until(ExpectedConditions
+                .visibilityOfAllElements(driver.findElements(inventoryItems)));
+        return this;
     }
 
 
 
+    @Step("Get the name of the first inventory item")
     public String getFirstItemName(){
         return driver.findElements(inventoryItemNames).getFirst().getText();
     }
 
+    @Step("Open the first inventory item")
     public PDP openFirstItem(){
         myWait().until(ExpectedConditions.elementToBeClickable(driver.findElements(inventoryItems).getFirst())).click();
 //        driver.findElements(inventoryItems).getFirst().click();
         return new PDP(driver);
     }
-
+    @Step("Add inventory item at index {idx} to cart")
     public HomePage clickAddToCart(int idx){
         List<WebElement> buttons = driver.findElements(addToCartButton);
         myWait().until(ExpectedConditions.elementToBeClickable(buttons.get(idx))).click();

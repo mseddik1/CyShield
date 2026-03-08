@@ -1,6 +1,7 @@
 package com.sauceDemo.pages;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,13 +17,15 @@ public class LoginPage extends BasePage{
     }
 
 
-    public LoginPage login(String userName, String password){
-        typeElement(usernameInput, userName);
+    @Step("Login Step, username: {username} , password: {password}")
+    public LoginPage login(String username, String password){
+        typeElement(usernameInput, username);
         typeElement(passwordInput, password);
         clickElement(loginButton);
         return this;
     }
 
+    @Step("Get login error message")
     public String getErrorMessage(){
         return driver.findElement(errorMessage).getText();
     }
@@ -32,6 +35,7 @@ public class LoginPage extends BasePage{
         return new HomePage(driver);
     }
 
+    @Step("Login with valid user from test data")
     public HomePage successfulLogin(){
         JsonNode validUser = testDataFile.path("login").path("validUser");
         String userName = validUser.path("username").asText();

@@ -1,6 +1,7 @@
 package com.sauceDemo.pages;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,18 +23,21 @@ public class CartPage extends BasePage {
     }
 
 
+    @Step("Get the name of the first product in the cart")
     public String getFirstItemName(){
         return driver.findElements(itemNames).getFirst().getText();
     }
 
 
+    @Step("Remove the first product from the cart")
     public CartPage removeFirstProduct(){
         myWait().until(ExpectedConditions.elementToBeClickable(driver.findElements(removeButton).getFirst())).click();
         return this;
     }
 
 
-    public CheckoutPage clickCheckout(){
+    @Step("Proceed to checkout")
+    public CheckoutPage proceedToCheckout(){
         clickElement(checkoutButton);
         return new CheckoutPage(driver);
     }
