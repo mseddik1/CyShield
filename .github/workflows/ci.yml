@@ -34,7 +34,7 @@ jobs:
       - name: Run TestNG suite
         env:
           CI: true
-        run: mvn test -DsuiteXmlFile=src/test/suites/Smoke_Suite.xml
+        run: mvn test -DsuiteXmlFile=src/test/suites/smoke/Master_Smoke.xml
 
       - name: Upload Surefire reports
         if: always()

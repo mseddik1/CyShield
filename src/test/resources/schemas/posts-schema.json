@@ -1,3 +1,35 @@
 {
-
+  "type": "object",
+  "required": ["posts", "total", "skip", "limit"],
+  "properties": {
+    "posts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "body", "tags", "reactions", "views", "userId"],
+        "properties": {
+          "id": { "type": "number" },
+          "title": { "type": "string" },
+          "body": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "reactions": {
+            "type": "object",
+            "required": ["likes", "dislikes"],
+            "properties": {
+              "likes": { "type": "number" },
+              "dislikes": { "type": "number" }
+            }
+          },
+          "views": { "type": "number" },
+          "userId": { "type": "number" }
+        }
+      }
+    },
+    "total": { "type": "number" },
+    "skip": { "type": "number" },
+    "limit": { "type": "number" }
+  }
 }

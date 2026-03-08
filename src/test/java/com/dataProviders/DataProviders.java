@@ -20,7 +20,7 @@ public class DataProviders {
     @DataProvider(name = "emptyCheckoutData")
     public Object[] emptyCheckoutData() {
 
-        JsonNode root = Utils.readAsJsonResource("testData/testData.json");
+        JsonNode root = Utils.readAsJsonResource("testData/comTestData.json");
         JsonNode emptyCheckoutNode = root.get("checkout").get("emptyCheckout");
 
         return extract2DArrayData(emptyCheckoutNode);

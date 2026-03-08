@@ -45,7 +45,7 @@ import java.util.Map;
 public class BaseTests {
 
     private static final Logger log = LoggerFactory.getLogger(BaseTests.class);
-    protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/testData.json");
+    protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/comTestData.json");
 
     protected LoginPage loginPage;
     protected BasePage basePage;

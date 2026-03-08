@@ -18,7 +18,7 @@ public class BasePage {
 
     protected WebDriver driver;
     protected final By CartIcon = By.id("shopping_cart_container");
-    protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/testData.json");
+    protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/comTestData.json");
     protected static VisualTestUtil visualTestUtil;
 
 
