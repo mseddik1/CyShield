@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
+            <artifactId>selenium-java</artifactId>
             <version>4.41.0</version>
         </dependency>
         <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->

@@ -47,9 +47,6 @@ public class BaseTests {
     private static final Logger log = LoggerFactory.getLogger(BaseTests.class);
     protected static final JsonNode testDataFile = Utils.readAsJsonResource("testData/testData.json");
 
-
-    private static final ThreadLocal<SoftAssert> softly =
-            ThreadLocal.withInitial(SoftAssert::new);
     protected LoginPage loginPage;
     protected BasePage basePage;
     private String browser;
@@ -70,6 +67,9 @@ public class BaseTests {
 
     @BeforeMethod(alwaysRun = true)
     protected void Setup(Method m) {
+        SoftAssertManager.reset();
+
+
         log.info("Initiating {} | Thread: {}", m.getName(), Thread.currentThread().getId());
 
 
@@ -138,6 +138,7 @@ public class BaseTests {
                 log.error("Quit failed", e);
             } finally {
                 DriverManager.unload();
+                SoftAssertManager.unload();
 
 
             }
@@ -166,6 +167,7 @@ public class BaseTests {
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
         }
         options.setExperimentalOption("prefs", prefs);
 

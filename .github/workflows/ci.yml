@@ -1,10 +1,7 @@
 name: Run Automation Tests
 
 on:
-  push:
-    branches:
-      - main
-      - develop
+
   pull_request:
     branches:
       - main
@@ -58,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
-          path: src/main/resources/screenshots/
+          path: test-output/screenshots/
           if-no-files-found: ignore
 
       - name: Install Allure CLI
