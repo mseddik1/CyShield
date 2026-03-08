@@ -12,4 +12,12 @@ public class SoftAssertManager {
     public static SoftAssert softly() {
         return softly.get();
     }
+
+    public static void reset() {
+        softly.set(new SoftAssert());
+    }
+
+    public static void unload() {
+        softly.remove();
+    }
 }
