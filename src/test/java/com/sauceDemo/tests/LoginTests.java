@@ -3,7 +3,6 @@ package com.sauceDemo.tests;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sauceDemo.base.BaseTests;
 import com.sauceDemo.pages.HomePage;
-import com.sauceDemo.pages.PDP;
 import com.utils.AllureUtils;
 import com.utils.RetryAnalyzer;
 import io.qameta.allure.Feature;
@@ -13,7 +12,6 @@ import io.qameta.allure.Story;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-import utils.Utils;
 
 
 @Feature("Login")
