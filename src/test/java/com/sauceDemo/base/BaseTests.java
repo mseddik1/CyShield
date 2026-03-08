@@ -162,6 +162,11 @@ public class BaseTests {
         prefs.put("autofill.profile_enabled", false);
         prefs.put("autofill.credit_card_enabled", false);
         prefs.put("useAutomationExtension", false);
+        if (System.getenv("CI") != null) {
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+        }
         options.setExperimentalOption("prefs", prefs);
 
 
