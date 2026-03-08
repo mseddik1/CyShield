@@ -3,6 +3,13 @@
     <parameter name="browser" value="chrome" />
     <parameter name="env" value="prod" />
     <test name="Full Regression">
+
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        
         <classes>
             <class name="com.sauceDemo.tests.LoginTests" />
             <class name="com.sauceDemo.tests.CheckoutTests" />

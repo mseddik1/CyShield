@@ -24,7 +24,7 @@ public class CheckoutTests extends BaseTests {
 
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, description = "User should be able to add items to cart")
+    @Test(groups = {"smoke","regression"},retryAnalyzer = RetryAnalyzer.class, description = "User should be able to add items to cart")
     @Story("Add to Cart")
     @Severity(SeverityLevel.CRITICAL)
     public void addToCart(){
@@ -45,7 +45,7 @@ public class CheckoutTests extends BaseTests {
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, description = "User should be able to complete checkout successfully")
+    @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class, description = "User should be able to complete checkout successfully")
     @Story("Successful Checkout")
     @Severity(SeverityLevel.CRITICAL)
     public void successfulCheckout(){
@@ -84,7 +84,7 @@ public class CheckoutTests extends BaseTests {
 
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, dataProvider = "emptyCheckoutData", dataProviderClass = DataProviders.class,
+    @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class, dataProvider = "emptyCheckoutData", dataProviderClass = DataProviders.class,
             description = "User should see validation error when checkout fields are empty")
     @Story("Empty Checkout Fields")
     @Severity(SeverityLevel.NORMAL)
@@ -109,7 +109,7 @@ public class CheckoutTests extends BaseTests {
 
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, description = "User should not be able to checkout with invalid data")
+    @Test(groups = {"regression"},retryAnalyzer = RetryAnalyzer.class, description = "User should not be able to checkout with invalid data")
     @Story("Invalid Checkout")
     @Severity(SeverityLevel.NORMAL)
     public void invalidCheckout(){

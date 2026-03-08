@@ -21,7 +21,7 @@ public class LoginTests extends BaseTests {
     private static final Logger log = LoggerFactory.getLogger(LoginTests.class);
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class,description = "Valid user should login successfully")
+    @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class,description = "Valid user should login successfully")
     @Story("Valid Login")
     @Severity(SeverityLevel.CRITICAL)
     public void validLogin(){
@@ -42,7 +42,7 @@ public class LoginTests extends BaseTests {
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class,description = "Invalid user should not login and should get an error message.")
+    @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class,description = "Invalid user should not login and should get an error message.")
     @Story("Valid Login")
     @Severity(SeverityLevel.CRITICAL)
     public void invalidLogin(){
@@ -61,7 +61,7 @@ public class LoginTests extends BaseTests {
     }
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class,description = "Locked out user should get an error message" )
+    @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class,description = "Locked out user should get an error message" )
     @Story("Valid Login")
     @Severity(SeverityLevel.NORMAL)
     public void lockedOutLogin(){
