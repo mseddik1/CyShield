@@ -1,5 +1,6 @@
 package com.sauceDemo.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,7 @@ public class CheckoutPage extends BasePage{
         super(driver);
     }
 
+    @Step("Fill checkout information: firstName='{firstName}', lastName='{lastName}', postalCode='{postalCode}'")
     public CheckoutPage continueCheckout(String firstName, String lastName, String postalCode){
         typeElement(firstNameInput, firstName);
         typeElement(lastNameInput, lastName);
@@ -37,6 +39,7 @@ public class CheckoutPage extends BasePage{
 
 
 
+    @Step("Get checkout error message")
     public String getErrorMessage(){
        return  myWait().until(ExpectedConditions
                 .visibilityOf(driver.findElement(errorContainer))).getText();
@@ -44,6 +47,7 @@ public class CheckoutPage extends BasePage{
 
 
 
+    @Step("Calculate total price of all items")
     public Double sumItemPrice(){
 
         Double totalPrice=0.0;
@@ -54,6 +58,7 @@ public class CheckoutPage extends BasePage{
         return totalPrice;
     }
 
+    @Step("Get displayed item subtotal")
     public Double getItemTotal(){
         String subtotalText = driver.findElement(itemTotal).getText();
         String amount = subtotalText.split("\\$")[1];
@@ -62,11 +67,13 @@ public class CheckoutPage extends BasePage{
     }
 
 
+    @Step("Click Finish to complete checkout")
     public CheckoutPage clickFinish(){
         clickElement(finishButton);
         return this;
     }
 
+    @Step("Verify checkout success message is displayed")
     public CheckoutPage getSuccessMessage(){
          String successMessageString = myWait().until(ExpectedConditions
                 .visibilityOf(driver.findElement(successMessage))).getText();
@@ -76,7 +83,8 @@ public class CheckoutPage extends BasePage{
          return this;
     }
 
+    @Step("Validate checkout completion page visually")
     public boolean isValidCheckoutVisual(){
-        return visualTestUtil.takeAndCompareScreenshot(checkoutCompleteContainer,"test",null);
+        return visualTestUtil.takeAndCompareScreenshot(checkoutCompleteContainer,"finishCheckout",null);
     }
 }

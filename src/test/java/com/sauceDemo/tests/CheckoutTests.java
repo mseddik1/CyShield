@@ -6,10 +6,14 @@ import com.sauceDemo.base.BaseTests;
 import com.sauceDemo.pages.CheckoutPage;
 import com.sauceDemo.pages.HomePage;
 import com.sauceDemo.pages.PDP;
+import com.utils.AllureUtils;
 import com.utils.RetryAnalyzer;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CheckoutTests extends BaseTests {
@@ -19,27 +23,31 @@ public class CheckoutTests extends BaseTests {
 
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void a(){
-        loginPage.successfulLogin();
 
-        softly().assertAll();
-
-    }
-
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, description = "User should be able to add items to cart")
+    @Story("Add to Cart")
+    @Severity(SeverityLevel.CRITICAL)
     public void addToCart(){
         HomePage homePage = loginPage.successfulLogin();
         String firstItem = homePage.getFirstItemName();
         PDP pdp = homePage.openFirstItem();
-        softly().assertEquals(pdp.getProductName(),firstItem,"PDP Item name mismatch!");
-        softly().assertEquals(pdp.clickAddToCart().openCart().getFirstItemName(), firstItem, "Cart Item name mismatch!");
+        Allure.step("Verify PDP item name matches selected item", () -> {
+            softly().assertEquals(pdp.getProductName(), firstItem, "PDP Item name mismatch!");
+            AllureUtils.attachScreenshot("PDP item");
+        });
+        Allure.step("Verify cart item name matches selected item", () ->{
+            softly().assertEquals(pdp.clickAddToCart().openCart().getFirstItemName(), firstItem, "Cart Item name mismatch!");
+            AllureUtils.attachScreenshot("Cart item");
+        });
+
         softly().assertAll();
 
 
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, description = "User should be able to complete checkout successfully")
+    @Story("Successful Checkout")
+    @Severity(SeverityLevel.CRITICAL)
     public void successfulCheckout(){
         JsonNode validCheckout = checkoutNode.path("validCheckout");
         String firstName = validCheckout.path("firstName").asText();
@@ -47,23 +55,39 @@ public class CheckoutTests extends BaseTests {
         String postalCode = validCheckout.path("postalCode").asText();
         CheckoutPage checkoutPage = loginPage.successfulLogin().clickAddToCart(0).clickAddToCart(0).clickAddToCart(3)
                 .openCart().removeFirstProduct()
-                .clickCheckout().continueCheckout(firstName,lastName,postalCode);
+                .proceedToCheckout().continueCheckout(firstName,lastName,postalCode);
 
-        softly().assertEquals(checkoutPage.getItemTotal(), checkoutPage.sumItemPrice(), "Check item prices!");
+        Allure.step("Check item prices sum and total sum are equal",()->{
+            softly().assertEquals(checkoutPage.getItemTotal(), checkoutPage.sumItemPrice(), "Check item prices!");
+            AllureUtils.attachScreenshot("Item prices and total price");
+        });
 
         log.info(checkoutPage.getItemTotal().toString());
         log.info(checkoutPage.sumItemPrice().toString());
 
 
-        checkoutPage.clickFinish().getSuccessMessage();
-        softly().assertTrue(checkoutPage.isValidCheckoutVisual(), "Visual Mismatch Detected!");
+        Allure.step("Complete checkout and verify success message", () -> {
+            checkoutPage.clickFinish().getSuccessMessage();
+            AllureUtils.attachScreenshot("Checkout success page");
+        });
+
+
+        Allure.step("Visually compare success page", () -> {
+            boolean matched = checkoutPage.isValidCheckoutVisual();
+            softly().assertTrue(matched, "Visual Mismatch Detected!");
+            AllureUtils.attachText("Visual comparison result", "Matched = " + matched);
+        });
+
         softly().assertAll();
 
     }
 
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class, dataProvider = "emptyCheckoutData", dataProviderClass = DataProviders.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, dataProvider = "emptyCheckoutData", dataProviderClass = DataProviders.class,
+            description = "User should see validation error when checkout fields are empty")
+    @Story("Empty Checkout Fields")
+    @Severity(SeverityLevel.NORMAL)
     public void emptyCheckout(JsonNode data){
 
         String firstName = data.path("firstName").asText();
@@ -73,16 +97,21 @@ public class CheckoutTests extends BaseTests {
 
         String errorMessage = loginPage.successfulLogin().clickAddToCart(0)
                 .openCart()
-                .clickCheckout().continueCheckout(firstName,lastName,postalCode).getErrorMessage();
+                .proceedToCheckout().continueCheckout(firstName,lastName,postalCode).getErrorMessage();
 
-        softly().assertEquals(errorMessage, expectedErrorMessage, "Check error message! -> "+errorMessage);
+        Allure.step("Verify checkout validation error message", () -> {
+            softly().assertEquals(errorMessage, expectedErrorMessage, "Check error message! -> " + errorMessage);
+            AllureUtils.attachScreenshot("Checkout validation error");
+        });
         softly().assertAll();
 
     }
 
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, description = "User should not be able to checkout with invalid data")
+    @Story("Invalid Checkout")
+    @Severity(SeverityLevel.NORMAL)
     public void invalidCheckout(){
         JsonNode invalidCheckout = checkoutNode.path("invalidCheckout");
         String firstName = invalidCheckout.path("firstName").asText();
@@ -92,10 +121,14 @@ public class CheckoutTests extends BaseTests {
 
         String errorMessage = loginPage.successfulLogin().clickAddToCart(0)
                 .openCart()
-                .clickCheckout().continueCheckout(firstName,lastName,postalCode).getErrorMessage();
+                .proceedToCheckout().continueCheckout(firstName,lastName,postalCode).getErrorMessage();
 
 
-        softly().assertEquals(errorMessage, expectedErrorMessage, "Check Error Message!");
+
+        Allure.step("Verify checkout validation error message", () -> {
+            softly().assertEquals(errorMessage, expectedErrorMessage, "Check error message! -> " + errorMessage);
+            AllureUtils.attachScreenshot("Checkout validation error");
+        });
 
         softly().assertAll();
 

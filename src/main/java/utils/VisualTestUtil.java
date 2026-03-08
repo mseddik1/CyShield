@@ -243,30 +243,36 @@ public class VisualTestUtil   {
      * Gets the method name of the test by specifying the class name where the tests are located
      * @return
      */
-    private String getTestMethodName(String className) {
-        //So I am getting all stack call of the method I am regardless
-        //Earlier I used to specify the index by using Thread.currentThread().getStackTrace()[i]
-        //Now i am just getting the class that starts with the name I want and then get the method name
+    private String getTestMethodName(String classPrefix) {
+
         for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-            if (element.getClassName().startsWith(className)) {
-                return element.getMethodName();
+
+            String className = element.getClassName();
+            String methodName = element.getMethodName();
+
+            //I am adding those here to ignore the lambda expressions (()->) that i use in Allure.step
+            if (className.startsWith(classPrefix)
+                    && !methodName.startsWith("lambda$")
+                    && !methodName.contains("$")) {
+
+                return methodName;
             }
         }
+
         return null;
     }
 
-    private String getTestClassName(String className) {
-        //So I am getting all stack call of the method I am regardless
-        //Earlier I used to specify the index by using Thread.currentThread().getStackTrace()[i]
-        //Now i am just getting the class that starts with the name I want and then get the method name
+    private String getTestClassName(String classPrefix) {
+
         for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-            if (element.getClassName().startsWith(className)) {
-                String fullClassName=element.getClassName();
-                //Here i am getting only the name of the class i am in.
-                //sample of full class name "com.cms.cms_api.tests.bannerModuleStrip.BannerModuleStripTests"
-                return fullClassName.substring(fullClassName.lastIndexOf('.')+1);
+
+            String fullClassName = element.getClassName();
+
+            if (fullClassName.startsWith(classPrefix)) {
+                return fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
             }
         }
+
         return null;
     }
 
