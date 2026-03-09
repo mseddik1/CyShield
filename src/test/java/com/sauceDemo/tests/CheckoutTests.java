@@ -6,8 +6,8 @@ import com.sauceDemo.base.BaseTests;
 import com.sauceDemo.pages.CheckoutPage;
 import com.sauceDemo.pages.HomePage;
 import com.sauceDemo.pages.PDP;
-import com.utils.AllureUtils;
-import com.utils.RetryAnalyzer;
+import utils.AllureUtils;
+import utils.RetryAnalyzer;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -25,7 +25,7 @@ public class CheckoutTests extends BaseTests {
 
 
     @Test(groups = {"smoke","regression"},retryAnalyzer = RetryAnalyzer.class, description = "User should be able to add items to cart")
-    @Story("Add to Cart")
+    @Story("Checkout")
     @Severity(SeverityLevel.CRITICAL)
     public void addToCart(){
         HomePage homePage = loginPage.successfulLogin();
@@ -46,7 +46,7 @@ public class CheckoutTests extends BaseTests {
     }
 
     @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class, description = "User should be able to complete checkout successfully")
-    @Story("Successful Checkout")
+    @Story("Checkout")
     @Severity(SeverityLevel.CRITICAL)
     public void successfulCheckout(){
         JsonNode validCheckout = checkoutNode.path("validCheckout");
@@ -86,7 +86,7 @@ public class CheckoutTests extends BaseTests {
 
     @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class, dataProvider = "emptyCheckoutData", dataProviderClass = DataProviders.class,
             description = "User should see validation error when checkout fields are empty")
-    @Story("Empty Checkout Fields")
+    @Story("Checkout")
     @Severity(SeverityLevel.NORMAL)
     public void emptyCheckout(JsonNode data){
 
@@ -110,7 +110,7 @@ public class CheckoutTests extends BaseTests {
 
 
     @Test(groups = {"regression"},retryAnalyzer = RetryAnalyzer.class, description = "User should not be able to checkout with invalid data")
-    @Story("Invalid Checkout")
+    @Story("Checkout")
     @Severity(SeverityLevel.NORMAL)
     public void invalidCheckout(){
         JsonNode invalidCheckout = checkoutNode.path("invalidCheckout");

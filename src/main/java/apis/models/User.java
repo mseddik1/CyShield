@@ -11,6 +11,7 @@ public class User {
     private String image;
     private String accessToken;
     private String refreshToken;
+    private String message;
 
     public User() {}
 
@@ -84,5 +85,13 @@ public class User {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

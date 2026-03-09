@@ -1,12 +1,19 @@
 {
-  "users": [
-    {
-      "username": "emilys",
-      "password": "emilyspass"
-    },
-    {
-      "username": "michaelw",
-      "password": "michaelwpass"
+  "users":{
+    "valid": [
+      {
+        "username": "emilys",
+        "password": "emilyspass"
+      },
+      {
+        "username": "michaelw",
+        "password": "michaelwpass"
+      }
+    ],
+    "invalid": {
+      "username": "invalid",
+      "password": "invalid"
     }
-  ]
+  }
+
 }
