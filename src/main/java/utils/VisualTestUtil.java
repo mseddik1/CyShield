@@ -38,9 +38,6 @@ public class VisualTestUtil   {
 
 
     /**
-     * This function takes a screenshot for WebDriver and AppiumDriver
-     * If there is a By locator, function will take a screenshot of the element only.
-     * If no locator sent, function will take screenshot for the whole view/page
      * @param locator
      */
     public void takeScreenshot(@Nullable By locator, String StepName) {
@@ -72,61 +69,6 @@ public class VisualTestUtil   {
     }
 
 
-
-    /**
-     * Compares the actual screenshot to the baseline and optionally saves a diff image.
-     */
-    public boolean compareScreenshot(@Nullable String baselineImageName, String ActualStepName) {
-        String methodName = getTestMethodName("com.cms.cms_api_app.tests");
-        String className = getTestClassName("com.cms.cms_api_app.tests");
-        String baselineFileBase;
-        String actualFileBase;
-        String diffFileBase;
-
-
-        baselineFileBase = BASE_PATH + "web/baseline/"+className+"/" ;
-        actualFileBase = BASE_PATH + "web/actual/"+className+"/" ;
-        diffFileBase = BASE_PATH + "web/diff/"+className+"/" ;
-
-        File baselineFile;
-        if(baselineImageName!=null){
-            baselineFile= new File(baselineFileBase.replace(className+"/","") + baselineImageName + ".png");
-        }else {
-            baselineFile = new File(baselineFileBase + ActualStepName +"_"+ methodName + ".png");
-        }
-        File actualFile=new File(actualFileBase + ActualStepName +"_"+ methodName + ".png");
-        File diffFile=new File(diffFileBase + ActualStepName +"_"+ methodName + ".png");
-
-
-
-        try {
-            BufferedImage expectedImage = ImageIO.read(baselineFile);
-            BufferedImage actualImage = ImageIO.read(actualFile);
-
-
-
-            ImageComparison comparison = new ImageComparison(expectedImage, actualImage);
-            comparison.setThreshold(10);
-            ImageComparisonResult result = comparison.compareImages();
-
-
-            if (result.getImageComparisonState() != ImageComparisonState.MATCH) {
-                System.out.println("Visual mismatch detected. See diff file!❌");
-                generateCombinedBaselineAndActual(baselineFile, actualFile, diffFile);
-//                throw new AssertionError("Visual regression detected in screenshot: " + methodName);
-                return false;
-
-            } else {
-                System.out.println("Screenshot matched baseline!✅");
-                return true;
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to compare screenshots", e);
-
-        }
-    }
 
 
     public static void generateCombinedBaselineAndActual(File baselineFile, File actualFile, File outputFile) {
