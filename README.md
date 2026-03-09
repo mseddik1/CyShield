@@ -223,7 +223,7 @@ Automated scenarios:
 
 - Add to cart
 - Successful checkout
-- Empty checkout (with data providers)
+- Empty checkout (Data Driver)
 - Invalid checkout
 
 
