@@ -1,7 +1,0 @@
-17:43:00 [main] DEBUG org.testng.TestNG - suiteXmlPath: "/Users/mseddik/Library/Caches/JetBrains/IdeaIC2025.2/temp-testng-customsuite.xml"
-17:43:00 [main] INFO  org.testng.internal.Utils - [TestNG] Running:
-  /Users/mseddik/Library/Caches/JetBrains/IdeaIC2025.2/temp-testng-customsuite.xml
-
-17:43:00 [main] INFO  com.sauceDemo.base.BaseTests - Initiating successfulCheckout | Thread: 1
-17:43:03 [main] INFO  com.listeners.TestListeners - Starting test: successfulCheckout
-17:43:03 [main] INFO  com.listeners.TestListeners - Test PASSED: successfulCheckout
