@@ -3,8 +3,8 @@ package com.sauceDemo.tests;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sauceDemo.base.BaseTests;
 import com.sauceDemo.pages.HomePage;
-import com.utils.AllureUtils;
-import com.utils.RetryAnalyzer;
+import utils.AllureUtils;
+import utils.RetryAnalyzer;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -20,7 +20,7 @@ public class LoginTests extends BaseTests {
 
 
     @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class,description = "Valid user should login successfully")
-    @Story("Valid Login")
+    @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
     public void validLogin(){
         JsonNode validUser = testDataFile.path("login").path("validUser");
@@ -41,7 +41,7 @@ public class LoginTests extends BaseTests {
     }
 
     @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class,description = "Invalid user should not login and should get an error message.")
-    @Story("Valid Login")
+    @Story("Login")
     @Severity(SeverityLevel.CRITICAL)
     public void invalidLogin(){
         JsonNode validUser = testDataFile.path("login").path("invalidUser");
@@ -60,7 +60,7 @@ public class LoginTests extends BaseTests {
 
 
     @Test(groups = {"smoke"},retryAnalyzer = RetryAnalyzer.class,description = "Locked out user should get an error message" )
-    @Story("Valid Login")
+    @Story("Login")
     @Severity(SeverityLevel.NORMAL)
     public void lockedOutLogin(){
         JsonNode validUser = testDataFile.path("login").path("lockedOutUser");

@@ -1,8 +1,8 @@
 package com.sauceDemo.base;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.listeners.MyListeners;
-import com.listeners.TestListeners;
+import listeners.MyListeners;
+import listeners.TestListeners;
 import com.sauceDemo.pages.BasePage;
 import com.sauceDemo.pages.LoginPage;
 
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.ConfigManager;
-import com.utils.DriverManager;
+import utils.DriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
