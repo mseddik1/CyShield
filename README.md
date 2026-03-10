@@ -224,7 +224,7 @@ Automated scenarios:
 - Add to cart
 - Successful checkout
 - Empty checkout (Data Driver)
-- Invalid checkout
+- Invalid checkout (This test fails and this catches a bug where invalid inputs should not be accepted)
 
 
 ---
