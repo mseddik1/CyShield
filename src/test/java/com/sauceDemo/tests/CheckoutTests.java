@@ -109,6 +109,8 @@ public class CheckoutTests extends BaseTests {
 
 
 
+    //This test case fails and this is an actual bug.
+    //Invalid inputs should not be accepted!
     @Test(groups = {"regression"},retryAnalyzer = RetryAnalyzer.class, description = "User should not be able to checkout with invalid data")
     @Story("Checkout")
     @Severity(SeverityLevel.NORMAL)
